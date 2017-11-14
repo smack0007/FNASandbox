@@ -1,0 +1,15 @@
+<Project >
+    <Target Name="CopyFnaLibs" AfterTargets="AfterBuild">
+        
+        <ItemGroup>
+            <FnaX64Dlls Include="$(MSBuildThisFileDirectory)..\External\fnalibs\x64\*.dll" />
+            <FnaX86Dlls Include="$(MSBuildThisFileDirectory)..\External\fnalibs\x86\*.dll" />
+        </ItemGroup>
+
+        <Copy SourceFiles="@(FnaX64Dlls)"
+              DestinationFolder="$(TargetDir)x64\" />
+
+        <Copy SourceFiles="@(FnaX86Dlls)"
+              DestinationFolder="$(TargetDir)x86\" />
+    </Target>
+</Project>
