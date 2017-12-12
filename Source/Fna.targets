@@ -12,4 +12,16 @@
         <Copy SourceFiles="@(FnaX86Dlls)"
               DestinationFolder="$(TargetDir)x86\" />
     </Target>
+    
+    <PropertyGroup>
+        <FxcExe>&quot;C:\Program Files (x86)\Windows Kits\10\bin\x64\fxc.exe&quot;</FxcExe>
+    </PropertyGroup>
+    
+    <Target Name="CompileShaders" AfterTargets="AfterBuild">
+        <ItemGroup>
+            <Shaders Include="*.fx" />
+        </ItemGroup>
+
+        <Exec Command="$(FxcExe) /nologo /Vd /T fx_2_0 /Fo &quot;$(TargetDir)%(Shaders.RelativeDir)%(Shaders.Filename).fxb&quot; &quot;$(ProjectDir)%(Shaders.Identity)&quot;" />
+    </Target>
 </Project>
